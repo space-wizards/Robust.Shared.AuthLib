@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <PackageId>Robust.Shared.AuthLib</PackageId>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Description>Shared authentication utilities for Space Station 14.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -8,6 +9,8 @@
         <RepositoryUrl>https://github.com/space-wizards/Robust.Shared.AuthLib</RepositoryUrl>
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
+        <Company>Space Wizards Federation</Company>
+        <Authors>PJB</Authors>
     </PropertyGroup>
 
 </Project>
