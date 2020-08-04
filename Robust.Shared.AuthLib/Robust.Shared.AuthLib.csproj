@@ -5,7 +5,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <Description>Shared authentication utilities for Space Station 14.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Version>0.1.0</Version>
+        <Version>0.1.1</Version>
         <RepositoryUrl>https://github.com/space-wizards/Robust.Shared.AuthLib</RepositoryUrl>
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
