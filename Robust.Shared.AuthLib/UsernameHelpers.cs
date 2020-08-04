@@ -6,7 +6,7 @@ namespace Robust.Shared.AuthLib
     {
         public const int NameLengthMax = 32;
 
-        private static readonly Regex ValidNameRegex = new Regex(@"[a-z0-9_]+", RegexOptions.IgnoreCase);
+        private static readonly Regex ValidNameRegex = new Regex(@"^[a-z0-9_]+$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Checks whether a user name is valid.
