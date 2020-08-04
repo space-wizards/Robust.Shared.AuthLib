@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using static Robust.Shared.AuthLib.UsernameHelpers;
 
 namespace Robust.Shared.AuthLib.Tests
 {
@@ -6,33 +7,19 @@ namespace Robust.Shared.AuthLib.Tests
     [Parallelizable]
     public class UsernameHelpersTest
     {
-        [Test]
-        public void TestEmpty()
+        [Test, TestOf(nameof(IsNameValid))]
+        [TestCase("", UsernameInvalidReason.Empty)]
+        // ReSharper disable once StringLiteralTypo
+        [TestCase("abcdefghijklmnopqrstuvwxyz123456789", UsernameInvalidReason.TooLong)]
+        [TestCase("+", UsernameInvalidReason.InvalidCharacter)]
+        [TestCase("foobar+", UsernameInvalidReason.InvalidCharacter)]
+        [TestCase("fo+obar+", UsernameInvalidReason.InvalidCharacter)]
+        [TestCase("fo@@@obar", UsernameInvalidReason.InvalidCharacter)]
+        [TestCase("Clown123_", UsernameInvalidReason.Valid)]
+        public void TestIsNameValid(string name, UsernameInvalidReason expectedReason)
         {
-            Assert.False(UsernameHelpers.IsNameValid("", out var reason));
-            Assert.AreEqual(reason, UsernameHelpers.UsernameInvalidReason.Empty);
-        }
-
-        [Test]
-        public void TestTooLong()
-        {
-            // ReSharper disable once StringLiteralTypo
-            Assert.False(UsernameHelpers.IsNameValid("abcdefghijklmnopqrstuvwxyz123456789", out var reason));
-            Assert.AreEqual(reason, UsernameHelpers.UsernameInvalidReason.TooLong);
-        }
-
-        [Test]
-        public void TestInvalidChar()
-        {
-            Assert.False(UsernameHelpers.IsNameValid("+", out var reason));
-            Assert.AreEqual(reason, UsernameHelpers.UsernameInvalidReason.InvalidCharacter);
-        }
-
-        [Test]
-        public void TestRight()
-        {
-            Assert.True(UsernameHelpers.IsNameValid("Clown123_", out var reason));
-            Assert.AreEqual(reason, UsernameHelpers.UsernameInvalidReason.Valid);
+            Assert.That(IsNameValid(name, out var reason), Is.EqualTo(expectedReason == UsernameInvalidReason.Valid));
+            Assert.That(reason, Is.EqualTo(expectedReason));
         }
     }
 }
