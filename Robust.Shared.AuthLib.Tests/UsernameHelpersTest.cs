@@ -11,7 +11,8 @@ namespace Robust.Shared.AuthLib.Tests
         [TestCase("", UsernameInvalidReason.Empty)]
         // ReSharper disable once StringLiteralTypo
         [TestCase("abcdefghijklmnopqrstuvwxyz123456789", UsernameInvalidReason.TooLong)]
-        [TestCase("+", UsernameInvalidReason.InvalidCharacter)]
+        [TestCase("a", UsernameInvalidReason.TooShort)]
+        [TestCase("++++", UsernameInvalidReason.InvalidCharacter)]
         [TestCase("foobar+", UsernameInvalidReason.InvalidCharacter)]
         [TestCase("fo+obar+", UsernameInvalidReason.InvalidCharacter)]
         [TestCase("fo@@@obar", UsernameInvalidReason.InvalidCharacter)]

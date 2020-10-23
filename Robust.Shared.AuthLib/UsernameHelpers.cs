@@ -4,7 +4,8 @@ namespace Robust.Shared.AuthLib
 {
     public static class UsernameHelpers
     {
-        public const int NameLengthMax = 32;
+        public static readonly int NameLengthMax = 32;
+        public static readonly int NameLengthMin = 3;
 
         private static readonly Regex ValidNameRegex = new Regex(@"^[a-z0-9_]+$", RegexOptions.IgnoreCase);
 
@@ -25,7 +26,13 @@ namespace Robust.Shared.AuthLib
                 return false;
             }
 
-            if (name.Length > 0 && name.Length >= NameLengthMax)
+            if (name.Length < NameLengthMin)
+            {
+                reason = UsernameInvalidReason.TooShort;
+                return false;
+            }
+
+            if (name.Length >= NameLengthMax)
             {
                 reason = UsernameInvalidReason.TooLong;
                 return false;
@@ -55,6 +62,11 @@ namespace Robust.Shared.AuthLib
             ///     The username is empty.
             /// </summary>
             Empty,
+
+            /// <summary>
+            ///     The username is too long (<see cref="UsernameHelpers.NameLengthMin"/>).
+            /// </summary>
+            TooShort,
 
             /// <summary>
             ///     The username is too long (<see cref="UsernameHelpers.NameLengthMax"/>).
